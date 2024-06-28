@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "rentalapi.apps.RentalapiConfig",
     "rest_framework",
     "django_filters",
+    "django.contrib.admindocs",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.contrib.admindocs.middleware.XViewMiddleware",
 ]
 
 ROOT_URLCONF = "mysite.urls"
@@ -135,4 +138,29 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "My API",
+    "DESCRIPTION": "My API description for renting bicycles.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # "SCHEMA_PATH_PREFIX": "/api/schema",
+    # "COMPONENT_SPLIT_REQUEST": True,
+    # "COMPONENT_SPLIT_RESPONSE": True,
+    # "COMPONENT_SPLIT_LINKS": True,
+    # "COMPONENT_NO_REQUEST_BODY_HAS_CONTENT": True,
+    # "SERVE_URLCONF": "mysite.urls",
+    # "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAuthenticated"],
+    # "SERVE_AUTHENTICATION": [
+    #     "rest_framework_simplejwt.authentication.JWTAuthentication"
+    # ],
+    # "SERVE_PUBLIC": False,
+    # "SERVE_SERVERS": [
+    #     {
+    #         "url": "http://localhost:8000",
+    #         "description": "Local development server",
+    #     },
+    # ],
 }

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.views import APIView
 from django.contrib.auth.hashers import make_password
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserAuthenticationSerializer
 from django.contrib.auth.models import User
 
 from rest_framework.generics import GenericAPIView, ListCreateAPIView
@@ -16,7 +16,19 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny
 
+from drf_spectacular.utils import extend_schema
 
+
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+@extend_schema(
+    request=UserAuthenticationSerializer,
+    responses=UserAuthenticationSerializer,
+    description="User login",
+)
 class UserLoginAPIView(APIView):
     permission_classes = [AllowAny]
 
@@ -28,7 +40,7 @@ class UserLoginAPIView(APIView):
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             return Response(
-                {"error": "Неверные учетные данные 1"},
+                {"error": "Неверные учетные данные"},
                 status=status.HTTP_401_UNAUTHORIZED,
             )
 
@@ -44,41 +56,16 @@ class UserLoginAPIView(APIView):
                 status=status.HTTP_200_OK,
             )
         return Response(
-            {"error": "Неверные учетные данные 2"}, status=status.HTTP_401_UNAUTHORIZED
+            {"error": "Неверные учетные данные"}, status=status.HTTP_401_UNAUTHORIZED
         )
 
 
-class UserViewSet(ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
+@extend_schema(
+    request=UserAuthenticationSerializer,
+    responses=UserAuthenticationSerializer,
+    description="User registration",
+)
 class UserRegistrationAPIView(APIView):
-    """
-    post:
-    Регистрация нового пользователя.
-
-    Параметры запроса:
-    - `username`: Имя пользователя.
-    - `email`: Электронная почта.
-    - `password`: Пароль.
-
-    Пример тела запроса:
-    ```
-    {
-        "username": "newuser",
-        "email": "newuser@example.com",
-        "password": "securepassword"
-    }
-    ```
-    """
-
-    def get(self, request):
-        # Возвращаем информационное сообщение о том, как использовать этот эндпоинт
-        return Response(
-            {"info": "Use POST to register a new user."}, status=status.HTTP_200_OK
-        )
-
     def post(self, request):
         user_data = request.data
         user_data["password"] = make_password(user_data["password"])
@@ -96,4 +83,4 @@ def hello_world_view(request) -> Response:
 
 # @api_view()
 # def home(request):
-#     return render(request, "rentals/home.html")
+#     return render(request, "myauthapi/home.html")
