@@ -15,6 +15,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.utils import timezone
 
+from .tasks import calculate_rental_cost
+
 
 class BicycleListView(ModelViewSet):
 
@@ -75,7 +77,7 @@ class BicycleListView(ModelViewSet):
     @extend_schema(
         summary="Delete a bicycle",
         description="Delete an existing **bicycle**",
-        responses={204: "No Content"},
+        responses={204: OpenApiResponse(description="No Content")},
     )
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
@@ -185,6 +187,8 @@ class BicycleReturn(APIView):
 
         total_hours = int(rental_duration_hours)
         total_minutes = int((rental_duration_hours - total_hours) * 60)
+
+        calculate_rental_cost.delay(rental.bicycle.id, total_hours)
 
         return Response(
             {

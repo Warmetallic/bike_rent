@@ -77,6 +77,11 @@ class UserViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         # Handle user registration logic here
         user_data = request.data
+        # Check if email is unique
+        if User.objects.filter(email=user_data.get("email")).exists():
+            return Response(
+                {"error": "Email already exists."}, status=status.HTTP_400_BAD_REQUEST
+            )
         user_data["password"] = make_password(user_data["password"])
         serializer = UserSerializer(data=user_data)
         if serializer.is_valid():
@@ -105,7 +110,7 @@ class UserViewSet(ModelViewSet):
     @extend_schema(
         summary="Delete a user",
         description="Delete an existing **user**",
-        responses={204: "No Content"},
+        responses={204: OpenApiResponse(description="No Content")},
     )
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
@@ -128,7 +133,7 @@ class UserLoginAPIView(APIView):
         password = request.data.get("password")
         try:
             # Fetch the user by email
-            user = User.objects.get(email=email)
+            user = User.objects.filter(email=email).first()
         except User.DoesNotExist:
             return Response(
                 {"error": "Неверные учетные данные"},
