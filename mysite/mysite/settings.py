@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "myauthapi.apps.MyauthapiConfig",
-    "rentalapi.apps.RentalapiConfig",
+    "bicycleapi.apps.BicycleapiConfig",
     "rest_framework",
     "django_filters",
     "django.contrib.admindocs",

@@ -1,5 +1,5 @@
 from django.urls import path
-from rentalapi.views import index
+from bicycleapi.views import index
 
 app_name = "rentalapi"
 

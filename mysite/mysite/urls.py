@@ -33,6 +33,6 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger",
     ),
-    path("api/", include("myauthapi.urls")),
-    path("api/", include("rentalapi.urls")),
+    path("api/myauth/", include("myauthapi.urls")),
+    path("api/bicycles/", include("bicycleapi.urls")),
 ]
