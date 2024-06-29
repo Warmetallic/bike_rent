@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "myauthapi.apps.MyauthapiConfig",
     "bicycleapi.apps.BicycleapiConfig",
+    "history.apps.HistoryConfig",
     "rest_framework",
     "django_filters",
     "django.contrib.admindocs",

@@ -20,6 +20,16 @@ from django.urls import path, include
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+history_urls = [
+    path("history/", include("history.urls")),
+    path("history/schema/", SpectacularAPIView.as_view(), name="history_schema"),
+    path(
+        "history/schema/swagger/",
+        SpectacularSwaggerView.as_view(url_name="history_schema"),
+        name="history_swagger",
+    ),
+]
+
 # URLs for the first API (auth)
 auth_urls = [
     path("myauth/", include("myauthapi.urls")),
@@ -53,4 +63,5 @@ urlpatterns = [
     ),
     *auth_urls,
     *bicycle_urls,
+    *history_urls,
 ]

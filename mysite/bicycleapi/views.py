@@ -183,7 +183,14 @@ class BicycleReturn(APIView):
         rental.bicycle.save()
         rental.save()
 
+        total_hours = int(rental_duration_hours)
+        total_minutes = int((rental_duration_hours - total_hours) * 60)
+
         return Response(
-            {"message": "Bicycle returned successfully", "cost": f"${rental_cost:.2f}"},
+            {
+                "message": "Bicycle returned successfully",
+                "Total time": f"{total_hours} hours {total_minutes} minutes",
+                "Cost": f"${rental_cost:.2f}",
+            },
             status=status.HTTP_200_OK,
         )
