@@ -18,11 +18,29 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from drf_spectacular.views import (
-    SpectacularAPIView,
-    SpectacularSwaggerView,
-)
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+# URLs for the first API (auth)
+auth_urls = [
+    path("myauth/", include("myauthapi.urls")),
+    path("myauth/schema/", SpectacularAPIView.as_view(), name="auth_schema"),
+    path(
+        "myauth/schema/swagger/",
+        SpectacularSwaggerView.as_view(url_name="auth_schema"),
+        name="auth_swagger",
+    ),
+]
+
+# URLs for the second API (bicycles)
+bicycle_urls = [
+    path("bicycles/", include("bicycleapi.urls")),
+    path("bicycles/schema/", SpectacularAPIView.as_view(), name="bicycle_schema"),
+    path(
+        "bicycles/schema/swagger/",
+        SpectacularSwaggerView.as_view(url_name="bicycle_schema"),
+        name="bicycle_swagger",
+    ),
+]
 
 urlpatterns = [
     path("admin/doc/", include("django.contrib.admindocs.urls")),
@@ -33,6 +51,6 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger",
     ),
-    path("api/myauth/", include("myauthapi.urls")),
-    path("api/bicycles/", include("bicycleapi.urls")),
+    *auth_urls,
+    *bicycle_urls,
 ]

@@ -11,9 +11,10 @@ class Bicycle(models.Model):
     )
 
 
-# class Rental(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     bicycle = models.ForeignKey(Bicycle, on_delete=models.CASCADE)
-#     start_time = models.DateTimeField()
-#     end_time = models.DateTimeField()
-#     price = models.DecimalField(max_digits=10, decimal_places=2)
+class Rental(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    bicycle = models.ForeignKey(Bicycle, on_delete=models.CASCADE)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField(null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    cost = models.DecimalField(max_digits=10, decimal_places=2, null=True)
