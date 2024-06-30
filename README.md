@@ -32,8 +32,8 @@
 - **Docker**: Скачайте Docker Desktop, в поиске введите `warmetallic/rent-bike`, запустите - http://localhost:8000/api/schema/swagger/#/
 
 ## Пример использования
-- Создать пользователя `http://127.0.0.1:8000/api/schema/swagger/#/myauth/myauth_users_create`
-- Пройти аутентификацию `http://127.0.0.1:8000/api/schema/swagger/#/myauth/myauth_login_create`
+- Создать пользователя http://127.0.0.1:8000/api/schema/swagger/#/myauth/myauth_users_create
+- Пройти аутентификацию http://127.0.0.1:8000/api/schema/swagger/#/myauth/myauth_login_create
 - Ввести токен access в Authorize
-- Арендовать велосипед, посмотрев какие есть свободные `http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_bicycle_list` и `http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_rent_create`
-- Сдать велосипед `http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_return_create`
+- Арендовать велосипед, посмотрев какие есть свободные http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_bicycle_list и http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_rent_create
+- Сдать велосипед http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_return_create
