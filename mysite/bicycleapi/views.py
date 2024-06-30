@@ -15,8 +15,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.utils import timezone
 
-from .tasks import calculate_rental_cost
-
 
 class BicycleListView(ModelViewSet):
 
@@ -187,8 +185,6 @@ class BicycleReturn(APIView):
 
         total_hours = int(rental_duration_hours)
         total_minutes = int((rental_duration_hours - total_hours) * 60)
-
-        calculate_rental_cost.delay(rental.bicycle.id, total_hours)
 
         return Response(
             {

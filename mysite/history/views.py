@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from bicycleapi.models import Rental
 from .serializers import RentalHistorySerializer
 from drf_spectacular.utils import extend_schema
+from .tasks import save_user_history
+from asgiref.sync import async_to_sync
 
 
 @extend_schema(
@@ -17,4 +19,8 @@ class RentalHistoryView(APIView):
     def get(self, request, *args, **kwargs):
         rentals = Rental.objects.filter(user=request.user).order_by("-start_time")
         serializer = RentalHistorySerializer(rentals, many=True)
+
+        # Schedule save_user_history to run asynchronously
+        async_to_sync(save_user_history)(serializer.data, request.user.email)
+
         return Response(serializer.data)
