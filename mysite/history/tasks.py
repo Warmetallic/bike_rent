@@ -2,7 +2,6 @@ import json
 import os
 import asyncio
 import aiofiles
-import boto3
 import aioboto3
 from botocore.exceptions import NoCredentialsError, ClientError
 from decouple import config
