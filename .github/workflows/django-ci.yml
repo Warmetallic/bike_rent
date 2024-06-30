@@ -44,4 +44,4 @@ jobs:
         pytest mysite/
 
     - name: Build Docker Image
-      run: docker build . --file Dockerfile --tag my_django_app:latest
+      run: docker build ./mysite --file mysite/Dockerfile --tag my_django_app:latest
