@@ -37,8 +37,8 @@ jobs:
     - name: Install Python dependencies
       uses: py-actions/py-dependency-install@v4
       with:
-        path: "requirements.txt"
-
+        path: "mysite/requirements.txt" # If the file is inside the mysite directory
+  
     - name: Run tests
       run: |
         python manage.py test
