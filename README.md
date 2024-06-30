@@ -19,12 +19,12 @@
 ## Технологии
 
 - **Backend**: Django, Django Rest Framework
-- **Асинхронность**: Celery
+- **Асинхронность**: Aioboto
 - **База данных**: PostgreSQL
 - **Тестирование**: PyTest
 - **Контейнеризация**: Docker
-- **CI/CD**: GitLab CI
-- **Облачные технологии**: AWS, Google Cloud или Яндекс.Облако
+- **CI/CD**: Github Actions
+- **Облачные технологии**: Яндекс.Облако
 
 ## Развертывание и использование
 
