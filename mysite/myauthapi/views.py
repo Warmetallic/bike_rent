@@ -82,6 +82,11 @@ class UserViewSet(ModelViewSet):
             return Response(
                 {"error": "Email already exists."}, status=status.HTTP_400_BAD_REQUEST
             )
+        # Original line causing error:
+        # user_data["password"] = make_password(user_data["password"])
+
+        # Fixed code:
+        user_data = request.data.copy()  # Make a mutable copy of the request data
         user_data["password"] = make_password(user_data["password"])
         serializer = UserSerializer(data=user_data)
         if serializer.is_valid():

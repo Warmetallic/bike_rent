@@ -10,6 +10,7 @@ from decouple import config
 bucket_name = config("BUCKET_NAME")
 
 
+# set up the S3 client
 async def upload_to_yandex_bucket_async(file_name, bucket_name, object_name=None):
     if object_name is None:
         object_name = file_name
