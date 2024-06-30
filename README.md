@@ -37,3 +37,4 @@
 - Ввести токен access в Authorize
 - Арендовать велосипед, посмотрев какие есть свободные http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_bicycle_list и http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_rent_create
 - Сдать велосипед http://127.0.0.1:8000/api/schema/swagger/#/bicycles/bicycles_return_create
+- Просмотреть историю аренд http://127.0.0.1:8000/api/schema/swagger/#/history/history_history_list
