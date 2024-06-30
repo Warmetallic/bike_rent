@@ -37,7 +37,7 @@ jobs:
     - name: Install Python dependencies
       uses: py-actions/py-dependency-install@v4
       with:
-        path: "bike_rent/requirements.txt"
+        path: "requirements.txt"
 
     - name: Run tests
       run: |
