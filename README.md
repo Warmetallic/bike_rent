@@ -15,7 +15,7 @@
 ## Технологии
 
 - **Backend**: Django, Django Rest Framework
-- **Асинхронность**: Aioboto
+- **Асинхронность**: Aioboto, Asgiref
 - **База данных**: PostgreSQL
 - **Тестирование**: PyTest
 - **Контейнеризация**: Docker
